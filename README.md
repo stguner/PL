@@ -1,12 +1,14 @@
 # Programming Language Mrt
-Group Members: ..., ...
+Group Members: Süleyman Türker GÜNER
 
 
 ## Syntax
 
 \<prog\> : \<stmt\> | \<stmts\>
 
-\<stmt\> : \<expr\> ...
+\<stmts\> : \<stmt\> | \<stmt\>;\<stmts\>
+
+\<stmt\> : \<expr\> 
 
 ## Explanations about the language
 
