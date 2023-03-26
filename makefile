@@ -1,4 +1,4 @@
-myprog: stg.l
+stg: stg.l
 	lex stg.l
 	gcc -o stg lex.yy.c -ll
 
