@@ -1,40 +1,40 @@
-#define INTEGER
-#define DOUBLE
-#define POPEN
-#define PCLOSE
-#define ARROPEN
-#define ARRCLOSE
-#define CUROPEN
-#define CURCLOSE
-#define PLUS
-#define MULTIPLY
-#define MINUS
-#define DIVIDE
-#define MOD
-#define PLUSPLUS
-#define MINUSMINUS
-#define POW
-#define EQUAL
-#define COMMA
-#define PLUSEQUAL
-#define MINUSEQUAL
-#define MULTIPLYEQUAL
-#define DIVIDEEQUAL
-#define ISEQUAL
-#define NOTEQUAL
-#define GANDE
-#define LANDE
-#define GREATER
-#define LESS
-#define OR
-#define AND
-#define IF
-#define ELSE
-#define FUNC
-#define LOOP
-#define PRINT
-#define INPUT
-#define PRIMITIVETYPES
-#define BOOL
-#define IDENTIFIER
-#define STRING
+#define INTEGER 1
+#define DOUBLE 2
+#define POPEN 3
+#define PCLOSE 4
+#define ARROPEN 5
+#define ARRCLOSE 6
+#define CUROPEN 7
+#define CURCLOSE 8
+#define PLUS 9
+#define MULTIPLY 10
+#define MINUS 11
+#define DIVIDE 12
+#define MOD 13
+#define PLUSPLUS 14
+#define MINUSMINUS 15
+#define POW 16
+#define EQUAL 17
+#define COMMA 18
+#define PLUSEQUAL 19
+#define MINUSEQUAL 20
+#define MULTIPLYEQUAL 21
+#define DIVIDEEQUAL 22
+#define ISEQUAL 23
+#define NOTEQUAL 24
+#define GANDE 25
+#define LANDE 26
+#define GREATER 27
+#define LESS 28
+#define OR 29
+#define AND 30
+#define IF 31
+#define ELSE 32
+#define FUNC 33
+#define LOOP 34
+#define PRINT 35
+#define INPUT 36
+#define PRIMITIVETYPES 37
+#define BOOL 38
+#define IDENTIFIER 39
+#define STRING 40
