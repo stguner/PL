@@ -1,29 +1,29 @@
 # Programming Language STG
-Group Members: Süleyman Türker GÜNER
+Group Members: Süleyman Türker GÜNER <br/>
 I am alone to do this assignment.
 ## Syntax
 
-\<prog\> : \<stmt\> | \<stmts\>
-\<stmts\> : \<stmt\> | \<stmt\>;\<stmts\>
-\<stmt\> : \<expr\> 
-\<logOp\> : \<or\> | \<and\> | \<smaller\>  | \<greater\>  | \<greaterEqual\> | \<smallerEqual\>  | \<notEqual\> | \<equal\> 
-\<mathOp\> : \<increasing\> | \<decreasing\> | \<pow\> | \<modding\> | \<division\> | \<multiplication\> | \<addition\> | \<subtraction\>
-\<increasing\> : \<expr\> `++` \<expr\> 
-\<decreasing\> : \<expr\> `--` \<expr\> 
-\<pow\> : \<expr\> `^` \<expr\> 
-\<modding\> : \<expr\> `%` \<expr\> 
-\<division\> : \<expr\> `/` \<expr\>
-\<multiplication\> : \<expr\> `*` \<expr\>
-\<addition\> : \<expr\> `+` \<expr\>
-\<subtraction\> : \<expr\> `-` \<expr\>
-\<or\> : \<expr\> `|` \<expr\>
-\<and\> : \<expr\> `&` \<expr\>
-\<smaller\> : \<expr\> `<` \<expr\>
-\<greater\> : \<expr\> `>` \<expr\>
-\<greaterEqual\> : \<expr\> `>=` \<expr\>
-\<smallerEqual\> : \<expr\> `<=` \<expr\>
-\<notEqual\> : \<expr\> `!=` \<expr\>
-\<equal\> : \<expr\> `==` \<expr\>
+\<prog\> : \<stmt\> | \<stmts\> <br/>
+\<stmts\> : \<stmt\> | \<stmt\>;\<stmts\> <br/>
+\<stmt\> : \<expr\> <br/>
+\<logOp\> : \<or\> | \<and\> | \<smaller\>  | \<greater\>  | \<greaterEqual\> | \<smallerEqual\>  | \<notEqual\> | \<equal\> <br/>
+\<mathOp\> : \<increasing\> | \<decreasing\> | \<pow\> | \<modding\> | \<division\> | \<multiplication\> | \<addition\> | \<subtraction\> <br/>
+\<increasing\> : \<expr\> `++` \<expr\>  <br/>
+\<decreasing\> : \<expr\> `--` \<expr\> <br/>
+\<pow\> : \<expr\> `^` \<expr\> <br/>
+\<modding\> : \<expr\> `%` \<expr\> <br/>
+\<division\> : \<expr\> `/` \<expr\> <br/>
+\<multiplication\> : \<expr\> `*` \<expr\> <br/>
+\<addition\> : \<expr\> `+` \<expr\> <br/>
+\<subtraction\> : \<expr\> `-` \<expr\> <br/>
+\<or\> : \<expr\> `|` \<expr\> <br/>
+\<and\> : \<expr\> `&` \<expr\> <br/>
+\<smaller\> : \<expr\> `<` \<expr\> <br/>
+\<greater\> : \<expr\> `>` \<expr\> <br/>
+\<greaterEqual\> : \<expr\> `>=` \<expr\> <br/>
+\<smallerEqual\> : \<expr\> `<=` \<expr\> <br/>
+\<notEqual\> : \<expr\> `!=` \<expr\> <br/>
+\<equal\> : \<expr\> `==` \<expr\> <br/>
 IF : if
 BOOL : true|false
 FUNC : func
