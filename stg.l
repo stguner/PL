@@ -2,8 +2,8 @@
 #include "stg.h"
 %}
 %%
-"[1-9][0-9]*" return INTEGER;
-"[-]?[0-9]+\.[0-9]+" return DOUBLE;
+[-]?[1-9][0-9]* return INTEGER;
+[-]?[0-9]+\.[0-9]+ return DOUBLE;
 "(" return POPEN;
 ")" return PCLOSE;
 "^" return POW;
@@ -38,10 +38,13 @@
 "while" return WHILE;
 "print" return PRINT;
 "int"|"double"|"str"|"bool" return PRIMITIVETYPES;
-"true|false" return BOOL;
+"true"|"false" return BOOL;
 [a-zA-Z_][a-zA-Z0-9_]* return IDENTIFIER;
+\"([^\\\"]|\\.)*\" return STRING;
+";" return SEMICOLON;
 .			printf("Syntax Error!");
 [ \t\n] {;}
+(\r\n|\r|\n) {yylineno++;}
 %%
 
 int yywrap (void){
