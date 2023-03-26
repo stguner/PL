@@ -31,7 +31,7 @@
 #define IF 31
 #define ELSE 32
 #define FUNC 33
-#define LOOP 34
+#define WHILE 34
 #define PRINT 35
 #define INPUT 36
 #define PRIMITIVETYPES 37

@@ -23,7 +23,7 @@
 "-=" return MINUSEQUAL;
 "*=" return MULTIPLYEQUAL;
 "/=" return DIVIDEEQUAL;
-"?=" return ISEQUAL;
+"==" return ISEQUAL;
 "!=" return NOTEQUAL;
 ">=" return GANDE;
 "<=" return LANDE;
@@ -34,7 +34,7 @@
 "if" return IF;
 "else" return ELSE;
 "func" return FUNC;
-"loop" return LOOP;
+"while" return WHILE;
 "print" return PRINT;
 "int"|"double"|"str"|"bool" return PRIMITIVETYPES;
 "true|false" return BOOL;

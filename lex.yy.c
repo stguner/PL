@@ -958,7 +958,7 @@ return PRIMITIVETYPES;
 case 36:
 YY_RULE_SETUP
 #line 40 "stg.l"
-return BOOL;
+return 38;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
