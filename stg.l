@@ -2,10 +2,11 @@
 #include "stg.h"
 %}
 %%
+"[1-9][0-9]*" return INTEGER;
+"[-]?[0-9]+\.[0-9]+" return DOUBLE;
 "(" return POPEN;
 ")" return PCLOSE;
-"[-]?[0-9]+" return INTEGER;
-"[-]?[0-9]+\.[0-9]+" return DOUBLE;
+"^" return POW;
 "[" return ARROPEN;
 "]" return ARRCLOSE;
 "{" return CUROPEN;
@@ -40,6 +41,7 @@
 "true|false" return BOOL;
 [a-zA-Z_][a-zA-Z0-9_]* return IDENTIFIER;
 .			printf("Syntax Error!");
+[ \t\n] {;}
 %%
 
 int yywrap (void){
