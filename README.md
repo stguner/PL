@@ -24,10 +24,10 @@ I am alone to do this assignment.
 \<smallerEqual\> : \<expr\> `<=` \<expr\> <br/>
 \<notEqual\> : \<expr\> `!=` \<expr\> <br/>
 \<equal\> : \<expr\> `==` \<expr\> <br/>
-IF : if
-BOOL : true|false
-FUNC : func
-WHILE : while 
+IF : if <br/>
+BOOL : true|false <br/>
+FUNC : func <br/>
+WHILE : while <br/>
 
 ## Explanations about the language
 - Stg is designed for software developers. They can easily write their codes in stg language.
