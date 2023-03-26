@@ -1,5 +1,5 @@
 # Programming Language STG
-Group Members: Süleyman Türker GÜNER.
+Group Members: Süleyman Türker GÜNER
 I am alone to do this assignment.
 ## Syntax
 
