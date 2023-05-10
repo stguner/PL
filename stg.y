@@ -1,7 +1,9 @@
 %{
 void yyerror (char *s);
+int yylex();
 #include <stdio.h> 
-%inlcude <stdlib.h>
+#include <stdlib.h>
+#include <ctype.h>
 int symbols[52];
 int symbolVal(char symbol);
 void updateSymbolVal(char symbol, int val);
@@ -23,7 +25,7 @@ line:   assignment ';'          {;}
     |   print exp ';'           {printf("Printing %d\n", $2);}
     |   line assignment ';'     {;}
     |   line print exp ';'      {printf("Printing %d\n", $3);}
-    |   line exit_command ';'   {exit(EXIT_SUCCESS)}
+    |   line exit_command ';'   {exit(EXIT_SUCCESS);}
     ;
 
 assignment : identifier '=' exp { updateSymbolVal($1,$3); }
@@ -45,9 +47,9 @@ term:   number                   {$$ = $1;}
 int computeSymbolIndex(char token)
 {
     int idx = -1;
-    if(isLower(token)) {
+    if(islower(token)) {
         idx = token - 'a' + 26;
-    }else if(isUpper(token)) {
+    }else if(isupper(token)) {
         idx = token - 'A';
     }
     return idx;
@@ -69,7 +71,7 @@ void updateSymbolVal(char symbol, int val)
 
 int main (void)
 {   /* init symbol table */
-    int i\
+    int i;
     for(i=0;i<52;i++) {
         symbols[i] = 0;
     }

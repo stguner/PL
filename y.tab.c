@@ -70,13 +70,15 @@
 #line 1 "stg.y"
 
 void yyerror (char *s);
+int yylex();
 #include <stdio.h> 
-%inlcude <stdlib.h>
+#include <stdlib.h>
+#include <ctype.h>
 int symbols[52];
 int symbolVal(char symbol);
 void updateSymbolVal(char symbol, int val);
 
-#line 80 "y.tab.c"
+#line 82 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -141,10 +143,10 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 10 "stg.y"
+#line 12 "stg.y"
 int num; char id;
 
-#line 148 "y.tab.c"
+#line 150 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -566,8 +568,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    21,    21,    22,    23,    24,    25,    26,    29,    32,
-      33,    34,    37,    38
+       0,    23,    23,    24,    25,    26,    27,    28,    31,    34,
+      35,    36,    39,    40
 };
 #endif
 
@@ -1137,79 +1139,79 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* line: assignment ';'  */
-#line 21 "stg.y"
+#line 23 "stg.y"
                                 {;}
-#line 1143 "y.tab.c"
+#line 1145 "y.tab.c"
     break;
 
   case 3: /* line: exit_command ';'  */
-#line 22 "stg.y"
+#line 24 "stg.y"
                                 {exit(EXIT_SUCCESS);}
-#line 1149 "y.tab.c"
+#line 1151 "y.tab.c"
     break;
 
   case 4: /* line: print exp ';'  */
-#line 23 "stg.y"
+#line 25 "stg.y"
                                 {printf("Printing %d\n", (yyvsp[-1].num));}
-#line 1155 "y.tab.c"
+#line 1157 "y.tab.c"
     break;
 
   case 5: /* line: line assignment ';'  */
-#line 24 "stg.y"
+#line 26 "stg.y"
                                 {;}
-#line 1161 "y.tab.c"
+#line 1163 "y.tab.c"
     break;
 
   case 6: /* line: line print exp ';'  */
-#line 25 "stg.y"
+#line 27 "stg.y"
                                 {printf("Printing %d\n", (yyvsp[-1].num));}
-#line 1167 "y.tab.c"
+#line 1169 "y.tab.c"
     break;
 
   case 7: /* line: line exit_command ';'  */
-#line 26 "stg.y"
-                                {exit(EXIT_SUCCESS)}
-#line 1173 "y.tab.c"
+#line 28 "stg.y"
+                                {exit(EXIT_SUCCESS);}
+#line 1175 "y.tab.c"
     break;
 
   case 8: /* assignment: identifier '=' exp  */
-#line 29 "stg.y"
+#line 31 "stg.y"
                                 { updateSymbolVal((yyvsp[-2].id),(yyvsp[0].num)); }
-#line 1179 "y.tab.c"
+#line 1181 "y.tab.c"
     break;
 
   case 9: /* exp: term  */
-#line 32 "stg.y"
+#line 34 "stg.y"
                                  {(yyval.num) = (yyvsp[0].num);}
-#line 1185 "y.tab.c"
+#line 1187 "y.tab.c"
     break;
 
   case 10: /* exp: exp '+' term  */
-#line 33 "stg.y"
+#line 35 "stg.y"
                                  {(yyval.num) = (yyvsp[-2].num) + (yyvsp[0].num);}
-#line 1191 "y.tab.c"
+#line 1193 "y.tab.c"
     break;
 
   case 11: /* exp: exp '-' term  */
-#line 34 "stg.y"
+#line 36 "stg.y"
                                  {(yyval.num) = (yyvsp[-2].num) - (yyvsp[0].num);}
-#line 1197 "y.tab.c"
+#line 1199 "y.tab.c"
     break;
 
   case 12: /* term: number  */
-#line 37 "stg.y"
+#line 39 "stg.y"
                                  {(yyval.num) = (yyvsp[0].num);}
-#line 1203 "y.tab.c"
+#line 1205 "y.tab.c"
     break;
 
   case 13: /* term: identifier  */
-#line 38 "stg.y"
+#line 40 "stg.y"
                                  {(yyval.num) = symbolVal((yyvsp[0].id));}
-#line 1209 "y.tab.c"
+#line 1211 "y.tab.c"
     break;
 
 
-#line 1213 "y.tab.c"
+#line 1215 "y.tab.c"
 
       default: break;
     }
@@ -1402,7 +1404,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 41 "stg.y"
+#line 43 "stg.y"
 
 
 /* C code */
@@ -1410,9 +1412,9 @@ yyreturnlab:
 int computeSymbolIndex(char token)
 {
     int idx = -1;
-    if(isLower(token)) {
+    if(islower(token)) {
         idx = token - 'a' + 26;
-    }else if(isUpper(token)) {
+    }else if(isupper(token)) {
         idx = token - 'A';
     }
     return idx;
@@ -1434,7 +1436,7 @@ void updateSymbolVal(char symbol, int val)
 
 int main (void)
 {   /* init symbol table */
-    int i\
+    int i;
     for(i=0;i<52;i++) {
         symbols[i] = 0;
     }

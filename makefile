@@ -1,8 +1,11 @@
-stg: stg.l
-	lex stg.l
-	yacc -d stg.y
-	gcc -o stg lex.yy.c -ll
-	gcc -o stg lex.yy.c stg.c
+stg: lex.yy.c y.tab.c
+		gcc -g lex.yy.c y.tab.c -o stg
 
-clean:
-	rm stg lex.yy.c
+lex.yy.c: y.tab.c stg.l
+		lex stg.l
+
+y.tab.c: stg.y
+		yacc -d stg.y
+
+clean: 
+		rm -rf lex.yy.c y.tab.c y.tab.h stg stg.dSYM

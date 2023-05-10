@@ -1,5 +1,8 @@
 %{
 #include "stg.h"
+#include "y.tab.h"
+void yyerror(char *s);
+int yylex();
 %}
 %%
 [-]?[1-9][0-9]* return INTEGER;
@@ -42,7 +45,6 @@
 [a-zA-Z_][a-zA-Z0-9_]* return IDENTIFIER;
 \"([^\\\"]|\\.)*\" return STRING;
 ";" return SEMICOLON;
-"exit" return exit_command;
 .			printf("Syntax Error!");
 [ \t\n] {;}
 (\r\n|\r|\n) {yylineno++;}
