@@ -1,0 +1,6 @@
+x = 123;
+print x;
+
+y = 256;
+print y;
+

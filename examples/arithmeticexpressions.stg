@@ -1,0 +1,14 @@
+x = 30;
+y = 4;
+print x + y;
+print x - y;
+print x * y;
+print x / y;
+print x % y;
+
+++x;
+print x;
+
+z = 1;
+--z;
+print z;

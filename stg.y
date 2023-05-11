@@ -1,9 +1,16 @@
 %{
-void yyerror (char *s);
+void yyerror (char *s);     /* C declarations used in actions */
 int yylex();
-#include <stdio.h> 
+#include <stdio.h>  
 #include <stdlib.h>
 #include <ctype.h>
+#include <math.h>
+char* s = "";
+int value = 0;
+int whileval = 1;
+int if_value = 1;
+int funcval = 1;
+int num1, num2;
 int symbols[52];
 int symbolVal(char symbol);
 void updateSymbolVal(char symbol, int val);
@@ -13,32 +20,74 @@ void updateSymbolVal(char symbol, int val);
 %start line
 %token print
 %token exit_command
+%token assign
+%token plusplus minusminus lessthan greaterthan isequal notequal and or not true false lessorequal greatorequal
 %token <num> number
 %token <id> identifier
-%type <num> line exp term
+%type <num> line expression term statements logicalexpression arithmeticexpression boolean
+%type <num> printstatement plusplusminusminusstatement assignmentstatement
 %type <id> assignment
 
 %% /* decription of expected inputs           corresponding actions */
 
-line:   assignment ';'          {;}
-    |   exit_command ';'        {exit(EXIT_SUCCESS);}
-    |   print exp ';'           {printf("Printing %d\n", $2);}
-    |   line assignment ';'     {;}
-    |   line print exp ';'      {printf("Printing %d\n", $3);}
-    |   line exit_command ';'   {exit(EXIT_SUCCESS);}
-    ;
+line    : statements
+        | line statements
+        ;
 
-assignment : identifier '=' exp { updateSymbolVal($1,$3); }
-    ;
+statements	: printstatement
+			| plusplusminusminusstatement
+            | assignmentstatement
+			;
 
-exp :   term                     {$$ = $1;}
-    |   exp '+' term             {$$ = $1 + $3;}
-    |   exp '-' term             {$$ = $1 - $3;}
-    ;
+printstatement	: print expression ';'		        {printf("Result: %d\n", $2);}
+		;
 
-term:   number                   {$$ = $1;}
-    |   identifier               {$$ = symbolVal($1);}
-    ;
+expression		: arithmeticexpression				{$$ = $1;}
+		| logicalexpression				            {$$ = $1;}
+		;
+
+arithmeticexpression	: 
+        term 						                {$$ = $1;}
+		| arithmeticexpression '+' term  			{$$ = $1 + $3;}
+		| arithmeticexpression '-' term 			{$$ = $1 - $3;}
+		| arithmeticexpression '*' term 			{$$ = $1 * $3;} 
+		| arithmeticexpression '/' term 			{$$ = $1 / $3;}
+		| arithmeticexpression '%' term 			{$$ = $1 % $3;}
+		;
+
+logicalexpression	:
+		 logicalexpression and boolean 					            {$$ = $1 && $3;}
+		| logicalexpression or boolean  					        {$$ = $1 || $3;}
+		| arithmeticexpression greaterthan arithmeticexpression 		{$$ = $1 > $3 ? 1 : 0;}
+		| arithmeticexpression lessthan arithmeticexpression 		{$$ = $1 < $3 ? 1 : 0;}	
+		| arithmeticexpression greatorequal arithmeticexpression 	{$$ = $1 >= $3 ? 1 : 0;}	
+		| arithmeticexpression lessorequal arithmeticexpression 	{$$ = $1 <= $3 ? 1 : 0;}
+		| arithmeticexpression isequal term 				        {$$ = $1 == $3 ? 1 : 0;}
+		| arithmeticexpression notequal term				        {$$ = $1 != $3 ? 1 : 0;}
+		| logicalexpression isequal boolean 				        {$$ = $1 == $3 ? 1 : 0;}
+		| logicalexpression notequal boolean 			            {$$ = $1 != $3 ? 1 : 0;}
+		| not boolean								                {$$ = !$2;}
+		| boolean								                    {$$ = $1;}
+       	;
+
+boolean	: true				{$$ = 1;}
+		| false				{$$ = 0;}
+       	;
+
+term   	: number                {$$ = $1;}
+		| identifier			{$$ = symbolVal($1);} 
+        ;
+
+plusplusminusminusstatement :
+		  plusplus identifier ';'		{updateSymbolVal($2,symbolVal($2) + 1);}
+		| minusminus identifier ';'		{updateSymbolVal($2,symbolVal($2) - 1);}
+	;
+
+assignmentstatement : assignment ';'		{;}
+		;
+
+assignment	: identifier '=' expression	{updateSymbolVal($1,$3); }
+			;
 
 %%
 
