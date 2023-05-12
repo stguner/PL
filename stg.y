@@ -7,10 +7,7 @@ int yylex();
 #include <math.h>
 char* s = "";
 int value = 0;
-int whileval = 1;
 int if_value = 1;
-int funcval = 1;
-int num1, num2;
 int symbols[52];
 int symbolVal(char symbol);
 void updateSymbolVal(char symbol, int val);
@@ -21,11 +18,11 @@ void updateSymbolVal(char symbol, int val);
 %token print
 %token exit_command
 %token assign
-%token plusplus minusminus lessthan greaterthan isequal notequal and or not true false lessorequal greatorequal onelinecomment multilinecomment
+%token plusplus minusminus lessthan greaterthan isequal notequal and or not true false lessorequal greatorequal onelinecomment multilinecomment iff elsee
 %token <num> number
 %token <id> identifier
-%type <num> line expression term statements logicalexpression arithmeticexpression boolean
-%type <num> printstatement plusplusminusminusstatement assignmentstatement comment
+%type <num> line expression term statements logicalexpression arithmeticexpression ifexpression boolean sts
+%type <num> printstatement plusplusminusminusstatement assignmentstatement comment ifstatement ifstatements ifsts elsestatement elsestatements elsests ifelsestatement
 %type <id> assignment
 
 %% /* decription of expected inputs           corresponding actions */
@@ -37,6 +34,7 @@ line    : statements
 statements	: printstatement
 			| plusplusminusminusstatement
             | assignmentstatement
+			| ifelsestatement
 			| comment
 			;
 
@@ -92,6 +90,67 @@ assignment	: identifier '=' expression	{updateSymbolVal($1,$3); }
 
 comment : onelinecomment        	{$$ = -1;}
 		|  multilinecomment			{$$ = -1;}
+		;
+
+ifelsestatement : 
+			ifstatement 
+		  | ifstatement elsestatement
+	;
+
+ifstatement	: ifexpression '{' ifstatements '}' 	{if(if_value == 1) $$ = value;}
+		;
+
+ifexpression	: iff '(' logicalexpression ')'  	{if_value = $3;}
+		| iff '(' identifier ')'  	{if_value = symbolVal($3);}
+		;
+
+ifstatements	: 
+		  sts
+		| ifsts
+		| ifstatements sts
+		| ifstatements ifsts
+	;
+
+sts		: term '+' term ';' 		{value = $1 + $3;}
+		| term '-' term ';' 		{value = $1 - $3;}
+		| term '*' term ';' 	{value = $1 * $3;} 
+		| term '/' term ';' 		{value = $1 / $3;}
+		| term '%' term ';' 		{value = $1 % $3;}
+		| boolean and boolean ';' 	{value = $1 && $3;}
+		| boolean or boolean ';' 	{value = $1 || $3;}
+		| term greaterthan term ';' 			{value = $1 > $3 ? 1 : 0;}
+		| term lessthan term ';' 			{value = $1 < $3 ? 1 : 0;}	
+		| term greatorequal term ';' 		{value = $1 >= $3 ? 1 : 0;}	
+		| term lessorequal term ';' 		{value = $1 <= $3 ? 1 : 0;}
+		| term isequal term ';' 			{value = $1 == $3 ? 1 : 0;}
+		| term notequal term ';' 		{value = $1 != $3 ? 1 : 0;}
+		| boolean isequal boolean ';' 	{value = $1 == $3 ? 1 : 0;}
+		| boolean notequal boolean ';' 	{value = $1 != $3 ? 1 : 0;}
+		| not boolean ';' 			{value = !$2;}
+		| boolean ';' 				{value = $1;}
+		| term ';' 					{value = $1;}
+	;
+
+ifsts	: identifier '=' sts 	{if(if_value == 1) updateSymbolVal($1,value);}
+		| print sts 			{if(if_value == 1) printf("Printing %d\n",value);}
+		| ifelsestatement 		{;}
+		| plusplusminusminusstatement
+	;
+
+elsestatement	: elsee '{' elsestatements '}'	{if(if_value == 0) $$ = value;}
+	;
+
+elsestatements	: sts
+		| elsests
+		| elsestatements sts
+		| elsestatements elsests
+	;
+
+elsests	: identifier '=' expression 	{if(if_value == 0) updateSymbolVal($1,value);}
+		| print sts 			{if(if_value == 0) printf("Printing %d\n",value);}
+		| ifelsestatement 		{;}
+		| plusplusminusminusstatement
+	;
 
 %%
 

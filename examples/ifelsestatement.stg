@@ -1,0 +1,26 @@
+!!
+if stands for if
+else stands for else
+-!
+
+if (177> 123) 
+    {print 11;}
+else {print 333333;}
+
+if (5 >= 123) 
+    {print 5;}
+else {print 123;}
+
+!! Nested if statements
+
+if (4 > 20) 
+    {
+        print 20;
+    }
+else 
+    {
+        if (1 != 12) 
+        {
+            print 11;
+        }
+    }

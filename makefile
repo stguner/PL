@@ -1,11 +1,13 @@
 exampleprog1.stg: 
 	@echo "\nThese are my example programs' outputs"
-	@echo "\n~~ Program name: printing_variables \n"
+	@echo "\n Program name: printing_variables \n"
 	@./stg < examples/variables.stg
-	@echo "\n~~~ Program name: arithmeticexpressions \n"
+	@echo "\n Program name: arithmeticexpressions \n"
 	@./stg < examples/arithmeticexpressions.stg
-	@echo "\n~~~ Program name: logicalexpressions \n"
+	@echo "\n Program name: logicalexpressions \n"
 	@./stg < examples/logicalexpressions.stg
+	@echo "\n Program name: ifelsestatements \n"
+	@./stg < examples/ifelsestatement.stg
 
 stg: lex.yy.c y.tab.c
 		gcc -g lex.yy.c y.tab.c -o stg

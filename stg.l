@@ -19,6 +19,9 @@ int yylex();
 !!((.|\n)*)-!                    {return multilinecomment;}
 !!.*                             {return onelinecomment;}
 
+"else"                            {return elsee;}
+"if"                             {return iff;}
+
 [a-zA-Z] {yylval.id = yytext[0]; return identifier;}
 [0-9]+ {yylval.num = atoi(yytext); return number;} 
 
