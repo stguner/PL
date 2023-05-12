@@ -21,11 +21,11 @@ void updateSymbolVal(char symbol, int val);
 %token print
 %token exit_command
 %token assign
-%token plusplus minusminus lessthan greaterthan isequal notequal and or not true false lessorequal greatorequal
+%token plusplus minusminus lessthan greaterthan isequal notequal and or not true false lessorequal greatorequal onelinecomment multilinecomment
 %token <num> number
 %token <id> identifier
 %type <num> line expression term statements logicalexpression arithmeticexpression boolean
-%type <num> printstatement plusplusminusminusstatement assignmentstatement
+%type <num> printstatement plusplusminusminusstatement assignmentstatement comment
 %type <id> assignment
 
 %% /* decription of expected inputs           corresponding actions */
@@ -37,6 +37,7 @@ line    : statements
 statements	: printstatement
 			| plusplusminusminusstatement
             | assignmentstatement
+			| comment
 			;
 
 printstatement	: print expression ';'		        {printf("Result: %d\n", $2);}
@@ -88,6 +89,9 @@ assignmentstatement : assignment ';'		{;}
 
 assignment	: identifier '=' expression	{updateSymbolVal($1,$3); }
 			;
+
+comment : onelinecomment        	{$$ = -1;}
+		|  multilinecomment			{$$ = -1;}
 
 %%
 

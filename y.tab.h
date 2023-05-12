@@ -70,8 +70,10 @@ extern int yydebug;
     false = 271,                   /* false  */
     lessorequal = 272,             /* lessorequal  */
     greatorequal = 273,            /* greatorequal  */
-    number = 274,                  /* number  */
-    identifier = 275               /* identifier  */
+    onelinecomment = 274,          /* onelinecomment  */
+    multilinecomment = 275,        /* multilinecomment  */
+    number = 276,                  /* number  */
+    identifier = 277               /* identifier  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -96,8 +98,10 @@ extern int yydebug;
 #define false 271
 #define lessorequal 272
 #define greatorequal 273
-#define number 274
-#define identifier 275
+#define onelinecomment 274
+#define multilinecomment 275
+#define number 276
+#define identifier 277
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -106,7 +110,7 @@ union YYSTYPE
 #line 19 "stg.y"
 int num; char id;
 
-#line 110 "y.tab.h"
+#line 114 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

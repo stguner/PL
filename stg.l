@@ -16,6 +16,9 @@ int yylex();
 ">" {return greaterthan;}
 "<" {return lessthan;}
 
+!!((.|\n)*)-!                    {return multilinecomment;}
+!!.*                             {return onelinecomment;}
+
 [a-zA-Z] {yylval.id = yytext[0]; return identifier;}
 [0-9]+ {yylval.num = atoi(yytext); return number;} 
 
