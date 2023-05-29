@@ -1,0 +1,7 @@
+function x () {print 666;}
+x();
+
+!! Function names must be unique.
+
+function x () {print 2023;}
+x();

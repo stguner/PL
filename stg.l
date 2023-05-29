@@ -16,7 +16,7 @@ int yylex();
 ">" {return greaterthan;}
 "<" {return lessthan;}
 
-(?i:fun)                        {return function;}
+(?i:function)                        {return func;}
 !!((.|\n)*)-!                    {return multilinecomment;}
 !!.*                             {return onelinecomment;}
 

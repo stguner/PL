@@ -74,8 +74,9 @@ extern int yydebug;
     multilinecomment = 275,        /* multilinecomment  */
     iff = 276,                     /* iff  */
     elsee = 277,                   /* elsee  */
-    number = 278,                  /* number  */
-    identifier = 279               /* identifier  */
+    func = 278,                    /* func  */
+    number = 279,                  /* number  */
+    identifier = 280               /* identifier  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -104,17 +105,18 @@ extern int yydebug;
 #define multilinecomment 275
 #define iff 276
 #define elsee 277
-#define number 278
-#define identifier 279
+#define func 278
+#define number 279
+#define identifier 280
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 16 "stg.y"
+#line 19 "stg.y"
 int num; char id;
 
-#line 118 "y.tab.h"
+#line 120 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

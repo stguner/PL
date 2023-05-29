@@ -8,9 +8,12 @@ int yylex();
 char* s = "";
 int value = 0;
 int if_value = 1;
+int funcval = 1;
 int symbols[52];
 int symbolVal(char symbol);
 void updateSymbolVal(char symbol, int val);
+void functionCall(char symbol);
+void functionExp(char symbol);
 %}
 
 %union {int num; char id;}    /* yacc definitions */
@@ -18,11 +21,12 @@ void updateSymbolVal(char symbol, int val);
 %token print
 %token exit_command
 %token assign
-%token plusplus minusminus lessthan greaterthan isequal notequal and or not true false lessorequal greatorequal onelinecomment multilinecomment iff elsee
+%token plusplus minusminus lessthan greaterthan isequal notequal and or not true false lessorequal greatorequal onelinecomment multilinecomment iff elsee func
 %token <num> number
 %token <id> identifier
 %type <num> line expression term statements logicalexpression arithmeticexpression ifexpression boolean sts
 %type <num> printstatement plusplusminusminusstatement assignmentstatement comment ifstatement ifstatements ifsts elsestatement elsestatements elsests ifelsestatement
+%type <num> functionstatement functioncallstatement functionstates functionsts funcexp
 %type <id> assignment
 
 %% /* decription of expected inputs           corresponding actions */
@@ -36,6 +40,8 @@ statements	: printstatement
             | assignmentstatement
 			| ifelsestatement
 			| comment
+			| functionstatement
+			| functioncallstatement
 			;
 
 printstatement	: print expression ';'		        {printf("Result: %d\n", $2);}
@@ -152,6 +158,27 @@ elsests	: identifier '=' expression 	{if(if_value == 0) updateSymbolVal($1,value
 		| plusplusminusminusstatement
 	;
 
+functionstatement : funcexp '{' functionstates '}' {if(funcval == 1) $$ = value;}
+	;
+
+funcexp	: func identifier '(' ')' {functionExp($2);}
+	;
+
+functioncallstatement : identifier '(' ')' ';' {functionCall($1);} 
+	;	
+
+functionstates : sts
+		| functionsts
+		| functionstates sts
+		| functionstates functionsts
+	;
+
+functionsts	: identifier '=' sts 	{if(funcval == 1) updateSymbolVal($1,value);}
+		| print sts 			{if(funcval == 1) printf("Printing %d\n",value);}
+		| ifelsestatement 					{;}
+		| plusplusminusminusstatement 		{;}
+		| functioncallstatement				{;}
+
 %%
 
 /* C code */
@@ -193,4 +220,24 @@ int main (void)
 void yyerror (char *s) 
 {
     fprintf (stderr, "%s\n", s);
+}
+
+void functionCall(char symbol) {
+	if (symbolVal(symbol) == -1) {
+		funcval = 1;
+		printf("%d\n", value);
+		printf("%s\n", s);
+	} else {
+		printf("Function is not defined \n");
+	}
+}
+
+void functionExp(char symbol)
+{
+	if(symbolVal(symbol) == -1){
+		printf("The function already exists.\n");
+	}
+	if(symbolVal(symbol) != -1){
+		updateSymbolVal(symbol, -1);	
+	}	
 }

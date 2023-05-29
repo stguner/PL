@@ -8,6 +8,10 @@ exampleprog1.stg:
 	@./stg < examples/logicalexpressions.stg
 	@echo "\n Program name: ifelsestatements \n"
 	@./stg < examples/ifelsestatement.stg
+	@echo "\n Program name: functions \n"
+	@./stg < examples/functions.stg
+	@echo "\n Program name: comments \n"
+	@./stg < examples/comment.stg
 
 stg: lex.yy.c y.tab.c
 		gcc -g lex.yy.c y.tab.c -o stg
