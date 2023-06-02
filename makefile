@@ -10,7 +10,7 @@ exampleprog1.stg:
 	@./stg < examples/ifelsestatement.stg
 	@echo "\n Program name: functions \n"
 	@./stg < examples/functions.stg
-	@echo "\n Program name: comments \n"
+	@echo "\n Program name: comments (It shows nothing because everyting i wrote everything in comment section\n"
 	@./stg < examples/comment.stg
 
 stg: lex.yy.c y.tab.c

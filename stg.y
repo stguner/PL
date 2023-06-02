@@ -51,8 +51,7 @@ expression		: arithmeticexpression				{$$ = $1;}
 		| logicalexpression				            {$$ = $1;}
 		;
 
-arithmeticexpression	: 
-        term 						                {$$ = $1;}
+arithmeticexpression	: term 						{$$ = $1;}
 		| arithmeticexpression '+' term  			{$$ = $1 + $3;}
 		| arithmeticexpression '-' term 			{$$ = $1 - $3;}
 		| arithmeticexpression '*' term 			{$$ = $1 * $3;} 
